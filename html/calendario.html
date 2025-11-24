@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fórmula 1 - Calendário</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="img/f1logo.png" type="image/x-icon">
+  <style>
+    :root {
+      --bg: linear-gradient(135deg, #1a1a1d, #0c0c0f);
+      --accent: #5be6ff;
+      --danger: #ff4747;
+      --text: #f5f5f5;
+      --card-bg: #181818;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+      --radius: 14px;
+      --transition: 0.3s;
+      --navbar-bg: rgba(20, 20, 20, 0.98);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    main {
+      flex: 1;
+    }
+
+       /* HEADER */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #181818e0;
+      padding: 12px 24px;
+      border-top: 4px solid var(--danger);
+      border-bottom: 4px solid var(--danger);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      font-size: 1.4em;
+      color: var(--accent);
+    }
+
+    .logo img {
+      height: 48px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+      margin: 0 5px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: background var(--transition), color var(--transition), transform var(--transition);
+    }
+
+    nav a:hover {
+      background: var(--danger);
+      color: #fff;
+      transform: scale(1.08);
+    }
+
+
+    /* BOTÃO HAMBÚRGUER */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background var(--transition);
+    }
+
+    .menu-toggle:hover {
+      background: #333;
+    }
+
+    .menu-toggle span {
+      width: 26px;
+      height: 3px;
+      background: var(--accent);
+      margin: 4px 0;
+      border-radius: 3px;
+      transition: all var(--transition);
+    }
+
+    /* ============================= */
+    /* RESPONSIVIDADE GERAL F1 SITE */
+    /* ============================= */
+    @media (max-width: 900px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      nav {
+        position: absolute;
+        top: 80px;
+        right: 0;
+        background: #111;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        padding: 20px 0;
+        border-top: 3px solid var(--danger);
+        transform: translateY(-200%);
+        opacity: 0;
+        transition: all 0.4s ease;
+      }
+
+      nav.active {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      nav a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+      }
+
+      .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translateY(8px);
+      }
+
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translateY(-8px);
+      }
+    }
+
+    /* SECTION */
+    .calendar-section {
+      text-align: center;
+      padding: 60px 20px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .calendar-section h2 {
+      font-size: 2.2em;
+      color: var(--accent);
+      margin-bottom: 32px;
+      text-shadow: 0 0 10px #000;
+    }
+
+    table {
+      width: 90%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    th {
+      background: linear-gradient(0deg, var(--danger), var(--accent));
+      color: #fff;
+      padding: 14px 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 1em;
+    }
+
+    td {
+      padding: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 1em;
+      transition: var(--transition);
+    }
+
+    tr:hover td {
+      background: rgba(91, 230, 255, 0.08);
+      color: var(--accent);
+      transform: scale(1.01);
+      box-shadow: 0 0 20px rgba(91, 230, 255, 0.1);
+    }
+
+    .map-btn {
+      display: inline-block;
+      margin-top: 28px;
+      background: linear-gradient(90deg, var(--danger), var(--accent));
+      color: #fff;
+      padding: 12px 24px;
+      border: none;
+      border-radius: var(--radius);
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+    }
+
+    .map-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 25px var(--accent);
+    }
+
+    footer {
+      text-align: center;
+      padding: 16px;
+      background: var(--navbar-bg);
+      border-top: 4px solid var(--danger);
+      color: var(--accent);
+      box-shadow: var(--shadow);
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="img/f1logo1-removebg-preview.png" alt="F1 Logo">
+      <span>FÓRMULA 1</span>
+    </div>
+
+    <div class="menu-toggle" id="menu-toggle">
+      <span></span><span></span><span></span>
+    </div>
+
+    <nav id="nav">
+      <a href="C:\Users\izaque.7944\Documents\front-end\f1-site\index.html">Início</a>
+      <a href="noticias.html">Notícias</a>
+      <a href="pilotos.html">Pilotos</a>
+      <a href="equipes.html">Equipes</a>
+      <a href="calendario.html">Calendário</a>
+      <a href="podio.html">Pódio</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="calendar-section">
+      <h2>Calendário 2025</h2>
+      <table>
+        <tr>
+          <th>#</th>
+          <th>Data</th>
+          <th>Grande Prêmio</th>
+          <th>Local</th>
+        </tr>
+        <tr><td>1</td><td>16/03</td><td>Austrália</td><td>Melbourne</td></tr>
+        <tr><td>2</td><td>23/03</td><td>China (Sprint)</td><td>Shanghai</td></tr>
+        <tr><td>3</td><td>06/04</td><td>Japão</td><td>Suzuka</td></tr>
+        <tr><td>4</td><td>13/04</td><td>Bahrein</td><td>Sakhir</td></tr>
+        <tr><td>5</td><td>20/04</td><td>Arábia Saudita</td><td>Jeddah</td></tr>
+        <tr><td>6</td><td>04/05</td><td>Miami (Sprint)</td><td>Miami</td></tr>
+        <tr><td>7</td><td>18/05</td><td>Emilia Romagna</td><td>Imola</td></tr>
+        <tr><td>8</td><td>25/05</td><td>Mônaco</td><td>Mônaco</td></tr>
+        <tr><td>9</td><td>01/06</td><td>Espanha</td><td>Montmeló</td></tr>
+        <tr><td>10</td><td>15/06</td><td>Canadá</td><td>Montreal</td></tr>
+        <tr><td>11</td><td>29/06</td><td>Austriá</td><td>Spielberg</td></tr>
+        <tr><td>12</td><td>06/07</td><td>Reino Unido</td><td>Silverstone</td></tr>
+        <tr><td>13</td><td>27/07</td><td>Bélgica (Sprint)</td><td>Spa</td></tr>
+        <tr><td>14</td><td>03/08</td><td>Hungria</td><td>Hungaroring</td></tr>
+        <tr><td>15</td><td>31/08</td><td>Holanda</td><td>Zandvoort</td></tr>
+        <tr><td>16</td><td>07/09</td><td>Itália</td><td>Monza</td></tr>
+        <tr><td>17</td><td>21/09</td><td>Azerbaijão</td><td>Baku</td></tr>
+        <tr><td>18</td><td>05/10</td><td>Singapura</td><td>Marina Bay</td></tr>
+        <tr><td>19</td><td>19/10</td><td>Estados Unidos (Sprint)</td><td>Austin</td></tr>
+        <tr><td>20</td><td>26/10</td><td>Mexico</td><td>Autodromo Hermanos Rodriguez</td></tr>
+        <tr><td>21</td><td>09/11</td><td>Brasil</td><td>Interlagos</td></tr>
+        <tr><td>22</td><td>23/11</td><td>Las Vegas</td><td>Las Vegas</td></tr>
+        <tr><td>23</td><td>30/11</td><td>Qatar</td><td>Losail</td></tr>
+        <tr><td>24</td><td>07/12</td><td>Abu Dhabi</td><td>Yas Marina</td></tr>
+      </table>
+
+      <a href="#" class="map-btn">Ver Corrida no Mapa 🗺️</a>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Fórmula 1 | Projeto inspirado no site oficial da F1
+  </footer>
+
+  <script>
+/* ------------------------- */
+/* MENU MOBILE               */
+/* ------------------------- */
+const toggle = document.getElementById('menu-toggle');
+const nav = document.getElementById('nav');
+
+toggle.addEventListener('click', () => {
+  toggle.classList.toggle('active');
+  nav.classList.toggle('active');
+});
+
+document.querySelectorAll("nav a").forEach(link => {
+  link.addEventListener("click", () => {
+    nav.classList.remove("active");
+    toggle.classList.remove("active");
+  });
+});
+
+/* ------------------------- */
+/* BUSCA NA TABELA           */
+/* ------------------------- */
+const searchBar = document.createElement("input");
+searchBar.placeholder = "🔎 Buscar corrida...";
+searchBar.style.padding = "12px";
+searchBar.style.margin = "20px";
+searchBar.style.width = "70%";
+searchBar.style.borderRadius = "12px";
+searchBar.style.border = "none";
+searchBar.style.outline = "none";
+searchBar.style.fontSize = "1em";
+
+document.querySelector(".calendar-section").prepend(searchBar);
+
+searchBar.addEventListener("input", () => {
+  const filter = searchBar.value.toLowerCase();
+  document.querySelectorAll("table tr").forEach((row, index) => {
+    if (index === 0) return; 
+    row.style.display = row.innerText.toLowerCase().includes(filter)
+      ? ""
+      : "none";
+  });
+});
+
+/* ------------------------- */
+/* ORDENAR TABELA            */
+/* ------------------------- */
+document.querySelectorAll("th").forEach((header, index) => {
+  header.style.cursor = "pointer";
+  header.addEventListener("click", () => {
+
+    const table = header.parentElement.parentElement.parentElement;
+    const rows = [...table.querySelectorAll("tr")].slice(1);
+
+    const sorted = rows.sort((a, b) => 
+      a.children[index].innerText.localeCompare(
+        b.children[index].innerText, "pt-BR", { numeric: true }
+      )
+    );
+
+    sorted.forEach(r => table.appendChild(r));
+  });
+});
+
+/* ------------------------- */
+/* CLIQUE NA LINHA           */
+/* ------------------------- */
+let selectedRow = null;
+
+document.querySelectorAll("table tr").forEach((row, index) => {
+  if (index === 0) return;
+
+  row.style.cursor = "pointer";
+
+  row.addEventListener("click", () => {
+    selectedRow = row;
+
+    const num = row.children[0].innerText;
+    const date = row.children[1].innerText;
+    const gp = row.children[2].innerText;
+    const local = row.children[3].innerText;
+
+    alert(
+      "🏁 GRANDE PRÊMIO #" + num +
+      "\n\n" +
+      "📅 Data: " + date + "\n" +
+      "🇨🇭 GP: " + gp + "\n" +
+      "📍 Local: " + local
+    );
+  });
+});
+
+/* ------------------------- */
+/* MAPA DINÂMICO 2.0 🔥      */
+/* ------------------------- */
+
+const circuitos = {
+  "Austrália": "Albert Park Circuit",
+  "China (Sprint)": "Shanghai International Circuit",
+  "Japão": "Suzuka International Racing Course",
+  "Bahrein": "Bahrain International Circuit",
+  "Arábia Saudita": "Jeddah Corniche Circuit",
+  "Miami (Sprint)": "Hard Rock Stadium Miami Circuit",
+  "Emilia Romagna": "Autodromo Enzo e Dino Ferrari Imola",
+  "Mônaco": "Circuit de Monaco",
+  "Espanha": "Circuit de Barcelona-Catalunya",
+  "Canadá": "Circuit Gilles Villeneuve",
+  "Austriá": "Red Bull Ring",
+  "Reino Unido": "Silverstone Circuit",
+  "Bélgica (Sprint)": "Circuit de Spa-Francorchamps",
+  "Hungria": "Hungaroring",
+  "Holanda": "Circuit Zandvoort",
+  "Itália": "Autodromo Nazionale di Monza",
+  "Azerbaijão": "Baku City Circuit",
+  "Singapura": "Marina Bay Street Circuit",
+  "Estados Unidos (Sprint)": "Circuit of the Americas",
+  "Mexico": "Autódromo Hermanos Rodríguez",
+  "Brasil": "Autódromo José Carlos Pace Interlagos",
+  "Las Vegas": "Las Vegas Strip Circuit",
+  "Qatar": "Lusail International Circuit",
+  "Abu Dhabi": "Yas Marina Circuit"
+};
+
+document.querySelector(".map-btn").addEventListener("click", () => {
+  if (!selectedRow) {
+    alert("Selecione uma corrida clicando em uma linha da tabela!");
+    return;
+  }
+
+  const nomeGP = selectedRow.children[2].innerText;
+
+  const circuito = circuitos[nomeGP];
+
+  if (!circuito) {
+    alert("Circuito não encontrado.");
+    return;
+  }
+
+  const url = "https://www.google.com/maps/search/" + encodeURIComponent(circuito);
+
+  window.open(url, "_blank");
+});
+
+</script>
+
+</body>
+</html>

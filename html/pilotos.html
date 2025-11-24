@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fórmula 1 - Pilotos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="img/f1logo.png" type="image/x-icon">
+  <style>
+    :root {
+      --main-bg: linear-gradient(135deg, #222 60%, #111 100%);
+      --main-color: #fff;
+      --accent: #5be6ff;
+      --danger: #ff5555;
+      --navbar-bg: rgba(20,20,20,0.98);
+      --card-bg: #181818e0;
+      --shadow: 0 8px 32px #00000060;
+      --radius: 18px;
+      --transition: 0.3s;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: var(--main-bg);
+      color: var(--main-color);
+      transition: background var(--transition), color var(--transition);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+        /* HEADER */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #181818e0;
+      padding: 12px 24px;
+      border-top: 4px solid var(--danger);
+      border-bottom: 4px solid var(--danger);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      font-size: 1.4em;
+      color: var(--accent);
+    }
+
+    .logo img {
+      height: 48px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+      margin: 0 5px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: background var(--transition), color var(--transition), transform var(--transition);
+    }
+
+    nav a:hover {
+      background: var(--danger);
+      color: #fff;
+      transform: scale(1.08);
+    }
+
+
+    /* BOTÃO HAMBÚRGUER */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background var(--transition);
+    }
+
+    .menu-toggle:hover { background: #333; }
+
+    .menu-toggle div {
+      width: 26px;
+      height: 3px;
+      background: var(--accent);
+      margin: 4px 0;
+      border-radius: 3px;
+      transition: all var(--transition);
+    }
+
+    /* CONTEÚDO */
+    main {
+      flex: 1;
+      padding: 40px 16px;
+      animation: fadeIn 1s;
+    }
+
+    .drivers-section {
+      text-align: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 30px;
+    }
+
+    .drivers-section h2 {
+      color: var(--accent);
+      font-size: 2em;
+      margin-bottom: 20px;
+      font-weight: 800;
+      text-shadow: 0 0 10px #00000080;
+    }
+
+    .driver-search {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .driver-search input {
+      padding: 10px 15px;
+      border-radius: var(--radius);
+      border: 2px solid var(--accent);
+      background: #111;
+      color: var(--main-color);
+      font-size: 1em;
+      width: 280px;
+      transition: box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .driver-search input:focus {
+      outline: none;
+      box-shadow: 0 0 10px var(--accent);
+      border-color: var(--danger);
+    }
+
+    .driver-search button {
+      background: var(--danger);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      font-weight: bold;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+    }
+
+    .driver-search button:hover {
+      background: var(--accent);
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    .drivers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    .driver-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #1a1a1a;
+      border: 2px solid transparent;
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: var(--main-color);
+      padding: 15px;
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .driver-card:hover {
+      transform: scale(1.05);
+      border-color: var(--accent);
+      box-shadow: 0 12px 40px var(--accent);
+    }
+
+    .driver-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      margin-bottom: 10px;
+      box-shadow: 0 2px 8px #00000080;
+    }
+
+    .driver-name {
+      font-weight: 800;
+      font-size: 1.1em;
+      color: var(--accent);
+    }
+
+    .driver-team {
+      font-size: 0.95em;
+      color: #ccc;
+    }
+
+    footer {
+      text-align: center;
+      padding: 16px;
+      background: var(--navbar-bg);
+      border-top: 4px solid var(--danger);
+      color: var(--accent);
+      box-shadow: var(--shadow);
+      font-weight: 500;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================= */
+    /* RESPONSIVIDADE F1 PADRÃO */
+    /* ============================= */
+    @media (max-width: 900px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      nav {
+        position: absolute;
+        top: 80px;
+        right: 0;
+        background: #111;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        padding: 20px 0;
+        border-top: 3px solid var(--danger);
+        transform: translateY(-200%);
+        opacity: 0;
+        transition: all 0.4s ease;
+      }
+
+      nav.active {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      nav a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+      }
+
+      .menu-toggle.active div:nth-child(1) {
+        transform: rotate(45deg) translateY(8px);
+      }
+
+      .menu-toggle.active div:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-toggle.active div:nth-child(3) {
+        transform: rotate(-45deg) translateY(-8px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="img/f1logo1-removebg-preview.png" alt="F1 Logo">
+      <span>FÓRMULA 1</span>
+    </div>
+    <div class="menu-toggle" id="menu-toggle">
+      <div></div><div></div><div></div>
+    </div>
+    <nav id="nav">
+      <a href="C:\Users\izaque.7944\Documents\front-end\f1-site\index.html">Início</a>
+      <a href="noticias.html">Notícias</a>
+      <a href="pilotos.html">Pilotos</a>
+      <a href="equipes.html">Equipes</a>
+      <a href="calendario.html">Calendário</a>
+      <a href="podio.html">Pódio</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="drivers-section">
+      <h2>Pilotos - Temporada 2025</h2>
+      <div class="driver-search">
+        <input id="search" type="search" placeholder="Procurar piloto por nome ou equipe...">
+        <button id="clear">Limpar</button>
+      </div>
+      <div id="drivers" class="drivers-grid"></div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Fórmula 1 | Projeto inspirado no site oficial da F1
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('nav');
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('active');
+      nav.classList.toggle('active');
+    });
+ 
+    const drivers = [
+      { name: 'Lando Norris', team: 'McLaren', country: 'United Kingdom', img: 'pilotos imagens/norris (1).avif' },
+      { name: 'Oscar Piastri', team: 'McLaren', country: 'Australia', img: 'pilotos imagens/piastri (1).avif' },
+      { name: 'Max Verstappen', team: 'Red Bull Racing', country: 'Netherlands', img: 'pilotos imagens/verstappen (1).avif' },
+      { name: 'Yuki Tsunoda', team: 'Red Bull Racing', country: 'Japan', img: 'pilotos imagens/tsunoda.avif' },
+      { name: 'George Russell', team: 'Mercedes', country: 'United Kingdom', img: 'pilotos imagens/george-russel.jpg' },
+      { name: 'Kimi Antonelli', team: 'Mercedes', country: 'Italy', img: 'pilotos imagens/kimi-antonelli.jpg' },
+      { name: 'Charles Leclerc', team: 'Ferrari', country: 'Monaco', img: 'pilotos imagens/charles-leclerc.jpg' },
+      { name: 'Lewis Hamilton', team: 'Ferrari', country: 'United Kingdom', img: 'pilotos imagens/lewis-hamilton.jpg' },
+      { name: 'Alexander Albon', team: 'Williams', country: 'Thailand', img: 'pilotos imagens/albon.avif' },
+      { name: 'Carlos Sainz', team: 'Williams', country: 'Spain', img: 'pilotos imagens/sainz.avif' },
+      { name: 'Liam Lawson', team: 'Racing Bulls', country: 'New Zealand', img: 'pilotos imagens/lawson-racing-bulls.avif' },
+      { name: 'Isack Hadjar', team: 'Racing Bulls', country: 'France', img: 'pilotos imagens/hadjar.avif' },
+      { name: 'Fernando Alonso', team: 'Aston Martin', country: 'Spain', img: 'pilotos imagens/alonso.avif' },
+      { name: 'Lance Stroll', team: 'Aston Martin', country: 'Canada', img: 'pilotos imagens/stroll.avif' },
+      { name: 'Esteban Ocon', team: 'Haas F1 Team', country: 'France', img: 'pilotos imagens/ocon.avif' },
+      { name: 'Oliver Bearman', team: 'Haas F1 Team', country: 'United Kingdom', img: 'pilotos imagens/bearman.avif' },
+      { name: 'Nico Hülkenberg', team: 'Kick Sauber', country: 'Germany', img: 'pilotos imagens/hulkenberg.avif' },
+      { name: 'Gabriel Bortoleto', team: 'Kick Sauber', country: 'Brazil', img: 'pilotos imagens/bortoleto.avif' },
+      { name: 'Pierre Gasly', team: 'Alpine', country: 'France', img: 'pilotos imagens/gasly.avif' },
+      { name: 'Franco Colapinto', team: 'Alpine', country: 'Argentina', img: 'pilotos imagens/colapinto.avif' }
+    ];
+ 
+    const driversEl = document.getElementById('drivers');
+    const searchInput = document.getElementById('search');
+    const clearBtn = document.getElementById('clear');
+ 
+    function createDriverCard(d) {
+      const el = document.createElement('a');
+      el.className = 'driver-card';
+      const slug = d.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+      el.href = 'pilotos-detalhes.html#' + slug;
+ 
+      const img = document.createElement('img');
+      img.src = d.img || 'img/f1logo1-removebg-preview.png';
+      img.alt = d.name;
+      el.appendChild(img);
+ 
+      const name = document.createElement('div');
+      name.className = 'driver-name';
+      name.textContent = d.name;
+      el.appendChild(name);
+ 
+      const team = document.createElement('div');
+      team.className = 'driver-team';
+      team.textContent = d.team;
+      el.appendChild(team);
+ 
+      return el;
+    }
+ 
+    function render(list) {
+      driversEl.innerHTML = '';
+      list.forEach(d => driversEl.appendChild(createDriverCard(d)));
+    }
+ 
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.toLowerCase().trim();
+      const filtered = drivers.filter(d =>
+        (d.name + ' ' + d.team + ' ' + d.country).toLowerCase().includes(q)
+      );
+      render(filtered);
+    });
+ 
+    clearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      render(drivers);
+    });
+ 
+    render(drivers);
+  </script>
+</body>
+</html>

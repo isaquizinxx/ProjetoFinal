@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalhes do Piloto - Fórmula 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="img/f1logo.png" type="image/x-icon">
+  <style>
+    :root {
+      --main-bg: linear-gradient(135deg, #222 60%, #111 100%);
+      --main-color: #fff;
+      --accent: #5be6ff;
+      --danger: #ff5555;
+      --navbar-bg: rgba(20,20,20,0.98);
+      --card-bg: #181818e0;
+      --shadow: 0 8px 32px #00000060;
+      --radius: 18px;
+      --transition: 0.3s;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: var(--main-bg);
+      color: var(--main-color);
+      transition: background var(--transition), color var(--transition);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #181818e0;
+      padding: 12px 24px;
+      border-top: 4px solid var(--danger);
+      border-bottom: 4px solid var(--danger);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      font-size: 1.4em;
+      color: var(--accent);
+    }
+
+    .logo img { height: 48px; }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+      margin: 0 5px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: background var(--transition), color var(--transition), transform var(--transition);
+    }
+
+    nav a:hover {
+      background: var(--danger);
+      color: #fff;
+      transform: scale(1.08);
+    }
+
+    /* BOTÃO HAMBÚRGUER */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background var(--transition);
+    }
+
+    .menu-toggle:hover { background: #333; }
+
+    .menu-toggle div {
+      width: 26px;
+      height: 3px;
+      background: var(--accent);
+      margin: 4px 0;
+      border-radius: 3px;
+      transition: all var(--transition);
+    }
+
+
+    /* CONTEÚDO */
+    main {
+      flex: 1;
+      padding: 40px 16px;
+      animation: fadeIn 1s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .driver-profile {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 30px;
+      max-width: 1000px;
+      width: 100%;
+      align-items: center;
+    }
+
+    .driver-photo {
+      flex: 1 1 350px;
+      text-align: center;
+    }
+
+    .driver-photo img {
+      width: 100%;
+      max-width: 350px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      object-fit: cover;
+    }
+
+    .driver-info {
+      flex: 2 1 500px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .driver-info h2 {
+      color: var(--accent);
+      font-size: 2.2em;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .driver-info .team {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #ddd;
+    }
+
+    .driver-info .number {
+      font-size: 3.5em;
+      font-weight: 900;
+      color: var(--danger);
+      text-shadow: 0 0 12px #00000090;
+    }
+
+    .driver-info .bio {
+      font-size: 1em;
+      color: #ccc;
+      line-height: 1.6em;
+      margin-top: 8px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .stat-box {
+      background: #111;
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-box h3 {
+      color: var(--accent);
+      margin: 0;
+      font-size: 1em;
+      font-weight: 700;
+    }
+
+    .stat-box p {
+      font-size: 1.5em;
+      font-weight: 900;
+      margin: 4px 0 0;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 18px;
+      background: var(--danger);
+      color: #fff;
+      border-radius: var(--radius);
+      font-weight: bold;
+      text-decoration: none;
+      transition: background var(--transition), transform var(--transition);
+      text-align: center;
+    }
+
+    .back-btn:hover {
+      background: var(--accent);
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 16px;
+      background: var(--navbar-bg);
+      border-top: 4px solid var(--danger);
+      color: var(--accent);
+      box-shadow: var(--shadow);
+      font-weight: 500;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+      /* ============================= */
+    /* RESPONSIVIDADE F1 PADRÃO */
+    /* ============================= */
+    @media (max-width: 900px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      nav {
+        position: absolute;
+        top: 80px;
+        right: 0;
+        background: #111;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        padding: 20px 0;
+        border-top: 3px solid var(--danger);
+        transform: translateY(-200%);
+        opacity: 0;
+        transition: all 0.4s ease;
+      }
+
+      nav.active {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      nav a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+      }
+
+      .menu-toggle.active div:nth-child(1) {
+        transform: rotate(45deg) translateY(8px);
+      }
+
+      .menu-toggle.active div:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-toggle.active div:nth-child(3) {
+        transform: rotate(-45deg) translateY(-8px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="img/f1logo1-removebg-preview.png" alt="F1 Logo">
+      <span>FÓRMULA 1</span>
+    </div>
+    <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+      <div></div><div></div><div></div>
+    </div>
+    <nav id="nav">
+      <a href="C:\Users\izaque.7944\Documents\front-end\f1-site\index.html">Início</a>
+      <a href="noticias.html">Notícias</a>
+      <a href="pilotos.html">Pilotos</a>
+      <a href="equipes.html">Equipes</a>
+      <a href="calendario.html">Calendário</a>
+      <a href="podio.html">Pódio</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="details" class="driver-profile"></section>
+  </main>
+
+  <footer>
+    &copy; 2025 Fórmula 1 | Projeto inspirado no site oficial da F1
+  </footer>
+
+  <script>
+    // MENU RESPONSIVO
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('nav');
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('active');
+      nav.classList.toggle('active');
+    });
+
+    // LISTA COMPLETA DE PILOTOS (campos extras incluídos)
+    const drivers = [
+      { name: 'Lando Norris', team: 'McLaren', country: 'United Kingdom', number: '4', age: 25, wins: 1, podiums: 15, poles: 3, img: 'pilotos imagens/norris (1).avif', bio: 'Lando Norris é jovem, rápido e carismático — tem boa velocidade de volta e se destacou na McLaren por consistência.' },
+      { name: 'Oscar Piastri', team: 'McLaren', country: 'Australia', number: '81', age: 23, wins: 0, podiums: 5, poles: 0, img: 'pilotos imagens/piastri (1).avif', bio: 'Oscar Piastri chegou à F1 com grande reputação das categorias inferiores; promissor e técnico em corrida.' },
+      { name: 'Max Verstappen', team: 'Red Bull Racing', country: 'Netherlands', number: '1', age: 27, wins: 60, podiums: 95, poles: 40, img: 'pilotos imagens/verstappen (1).avif', bio: 'Tricampeão mundial e um dos pilotos mais dominantes da era moderna — velocidade e agressividade.' },
+      { name: 'Yuki Tsunoda', team: 'Red Bull Racing', country: 'Japan', number: '22', age: 24, wins: 0, podiums: 0, poles: 0, img: 'pilotos imagens/tsunoda.avif', bio: 'Yuki é combativo e tem mostrado evolução constante — especialmente em ritmo de corrida.' },
+      { name: 'George Russell', team: 'Mercedes', country: 'United Kingdom', number: '63', age: 27, wins: 2, podiums: 20, poles: 3, img: 'pilotos imagens/george-russel.jpg', bio: 'George é consistente, bom na classificação e uma peça-chave para a Mercedes.' },
+      { name: 'Kimi Antonelli', team: 'Mercedes', country: 'Italy', number: '55', age: 18, wins: 0, podiums: 0, poles: 0, img: 'pilotos imagens/kimi-antonelli.jpg', bio: 'Talento jovem vindo dos escalões de base; muito observado pela sua maturidade para a idade.' },
+      { name: 'Charles Leclerc', team: 'Ferrari', country: 'Monaco', number: '16', age: 26, wins: 5, podiums: 30, poles: 20, img: 'pilotos imagens/charles-leclerc.jpg', bio: 'Principal piloto da Ferrari: velocidade pura em classificação e combatividade nas corridas.' },
+      { name: 'Lewis Hamilton', team: 'Ferrari', country: 'United Kingdom', number: '44', age: 40, wins: 103, podiums: 197, poles: 104, img: 'pilotos imagens/lewis-hamilton.jpg', bio: 'Sete vezes campeão mundial, mistura experiência e velocidade — ainda competitivo no topo.' },
+      { name: 'Alexander Albon', team: 'Williams', country: 'Thailand', number: '23', age: 28, wins: 0, podiums: 1, poles: 0, img: 'pilotos imagens/albon.avif', bio: 'Alex voltou à F1 com maturidade; ótimo em gestão de pneus e ultrapassagens.' },
+      { name: 'Carlos Sainz', team: 'Williams', country: 'Spain', number: '55', age: 29, wins: 1, podiums: 10, poles: 0, img: 'pilotos imagens/sainz.avif', bio: 'Piloto experiente, consistente e com bom trabalho em equipe — traz estabilidade.' },
+      { name: 'Liam Lawson', team: 'Racing Bulls', country: 'New Zealand', number: '63', age: 22, wins: 0, podiums: 0, poles: 0, img: 'pilotos imagens/lawson-racing-bulls.avif', bio: 'Jovem neozelandês com boa adaptação; se destaca em corridas de recuperação.' },
+      { name: 'Isack Hadjar', team: 'Racing Bulls', country: 'France', number: '21', age: 20, wins: 0, podiums: 0, poles: 0, img: 'pilotos imagens/hadjar.avif', bio: 'Promessa francesa vindo das categorias de base; técnico e rápido em ritmo de classificação.' },
+      { name: 'Fernando Alonso', team: 'Aston Martin', country: 'Spain', number: '14', age: 43, wins: 32, podiums: 99, poles: 22, img: 'pilotos imagens/alonso.avif', bio: 'Veterano resiliente, conhecido por sua inteligência de corrida e combatividade.' },
+      { name: 'Lance Stroll', team: 'Aston Martin', country: 'Canada', number: '18', age: 27, wins: 1, podiums: 6, poles: 0, img: 'pilotos imagens/stroll.avif', bio: 'Piloto com experiência variável; tem momentos de bom desempenho em corridas específicas.' },
+      { name: 'Esteban Ocon', team: 'Haas F1 Team', country: 'France', number: '31', age: 28, wins: 1, podiums: 5, poles: 0, img: 'pilotos imagens/ocon.avif', bio: 'Consistente, combativo e eficiente em estratégia — forte em corridas longas.' },
+      { name: 'Oliver Bearman', team: 'Haas F1 Team', country: 'United Kingdom', number: '36', age: 19, wins: 0, podiums: 0, poles: 0, img: 'pilotos imagens/bearman.avif', bio: 'Jovem promessa britânica com bons tempos de volta e sangue frio em disputas.' },
+      { name: 'Nico Hülkenberg', team: 'Kick Sauber', country: 'Germany', number: '27', age: 36, wins: 0, podiums: 0, poles: 0, img: 'pilotos imagens/hulkenberg.avif', bio: 'Veterano confiável, excelente em recuperação de corridas e estratégia de equipe.' },
+      { name: 'Gabriel Bortoleto', team: 'Kick Sauber', country: 'Brazil', number: '88', age: 19, wins: 0, podiums: 0, poles: 0, img: 'pilotos imagens/bortoleto.avif', bio: 'Jovem brasileiro que subiu com momentum — técnica apurada nas categorias de base.' },
+      { name: 'Pierre Gasly', team: 'Alpine', country: 'France', number: '10', age: 28, wins: 1, podiums: 9, poles: 0, img: 'pilotos imagens/gasly.avif', bio: 'Rápido em corridas e qualificação; consistente e combativo em condições difíceis.' },
+      { name: 'Franco Colapinto', team: 'Alpine', country: 'Argentina', number: '11', age: 22, wins: 0, podiums: 0, poles: 0, img: 'pilotos imagens/colapinto.avif', bio: 'Jovem talento argentino com pacote técnico forte e boa leitura de corrida.' }
+    ];
+
+    // PEGAR PILOTO PELO HASH (mesma lógica do index)
+    const slug = window.location.hash.substring(1);
+    function toSlug(name) {
+      return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    }
+
+    const driver = drivers.find(d => toSlug(d.name) === slug);
+    const details = document.getElementById('details');
+
+    if (driver) {
+      details.innerHTML = `
+        <div class="driver-photo">
+          <img src="${driver.img}" alt="${driver.name}" loading="lazy">
+        </div>
+        <div class="driver-info">
+          <div class="number">#${driver.number}</div>
+          <h2>${driver.name}</h2>
+          <div class="team">${driver.team}</div>
+          <div class="country">🏁 ${driver.country} • ${driver.age} anos</div>
+          <p class="bio">${driver.bio}</p>
+          <div class="stats">
+            <div class="stat-box"><h3>Vitórias</h3><p>${driver.wins}</p></div>
+            <div class="stat-box"><h3>Pódios</h3><p>${driver.podiums}</p></div>
+            <div class="stat-box"><h3>Poles</h3><p>${driver.poles}</p></div>
+          </div>
+          <a href="pilotos.html" class="back-btn">← Voltar aos Pilotos</a>
+        </div>
+      `;
+    } else {
+      details.innerHTML = `
+        <div style="width:100%;text-align:center">
+          <p>Piloto não encontrado.</p>
+          <a href="pilotos.html" class="back-btn">← Voltar</a>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>

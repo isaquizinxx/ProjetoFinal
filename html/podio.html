@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fórmula 1 - Pódio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="img/f1logo.png" type="image/x-icon">
+  <style>
+    :root {
+      --main-bg: linear-gradient(135deg, #222 60%, #111 100%);
+      --main-color: #fff;
+      --accent: #5be6ff;
+      --danger: #ff5555;
+      --card-bg: #181818e0;
+      --table-bg: #181818e0;
+      --shadow: 0 8px 32px #00000060;
+      --radius: 18px;
+      --transition: 0.3s;
+      --navbar-bg: rgba(20, 20, 20, 0.98);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: var(--main-bg);
+      color: var(--main-color);
+      transition: background var(--transition), color var(--transition);
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #181818e0;
+      padding: 12px 24px;
+      border-top: 4px solid var(--danger);
+      border-bottom: 4px solid var(--danger);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      font-size: 1.4em;
+      color: var(--accent);
+    }
+
+    .logo img {
+      height: 48px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+      margin: 0 5px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: background var(--transition), color var(--transition), transform var(--transition);
+    }
+
+    nav a:hover {
+      background: var(--danger);
+      color: #fff;
+      transform: scale(1.08);
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background var(--transition);
+    }
+
+    .menu-toggle:hover {
+      background: #333;
+    }
+
+    .menu-toggle span {
+      width: 26px;
+      height: 3px;
+      background: var(--accent);
+      margin: 4px 0;
+      border-radius: 3px;
+      transition: all var(--transition);
+    }
+
+    @media (max-width: 900px) {
+      .menu-toggle { display: flex; }
+      nav {
+        position: absolute;
+        top: 80px;
+        right: 0;
+        background: #111;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        padding: 20px 0;
+        border-top: 3px solid var(--danger);
+        transform: translateY(-200%);
+        opacity: 0;
+        transition: all 0.4s ease;
+      }
+      nav.active { transform: translateY(0); opacity: 1; }
+      nav a { display: block; width: 100%; text-align: center; padding: 12px; }
+      .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translateY(8px); }
+      .menu-toggle.active span:nth-child(2) { opacity: 0; }
+      .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translateY(-8px); }
+    }
+
+    .top3 {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin: 40px 0 24px 0;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: linear-gradient(120deg, #1a1a1a 80%, #222 100%);
+      border: 2px solid var(--danger);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px 18px 18px 18px;
+      text-align: center;
+      width: 220px;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .card:hover {
+      transform: scale(1.06) rotate(-1deg);
+      box-shadow: 0 12px 40px var(--accent);
+      border-color: var(--accent);
+    }
+
+    .card img {
+      width: 120px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 8px #00000060;
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+
+    .card:hover img {
+      box-shadow: 0 4px 24px var(--accent);
+      transform: scale(1.08);
+    }
+
+    .card h2 {
+      font-size: 2em;
+      margin: 0;
+      color: var(--danger);
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .card h1 {
+      font-size: 1.3em;
+      margin: 8px 0 4px 0;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .card p {
+      margin: 2px 0;
+      font-size: 1em;
+      color: #ccc;
+    }
+
+    .card.verstappen {
+      border-color: var(--accent);
+      background: linear-gradient(120deg, #1a1a1a 80%, #0033cc 100%);
+    }
+
+    .ranking-table-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    table {
+      width: 95%;
+      max-width: 900px;
+      border-collapse: collapse;
+      background: var(--table-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin: 0 auto;
+      font-size: 1.05em;
+    }
+
+    th, td {
+      padding: 12px 8px;
+      text-align: center;
+      border-bottom: 1px solid #333;
+    }
+
+    th {
+      background: #222;
+      color: var(--accent);
+      font-size: 1.1em;
+      letter-spacing: 1px;
+    }
+
+    tr:hover {
+      background: #222;
+      color: var(--danger);
+      transition: background var(--transition);
+    }
+
+    .chart-container {
+      width: 100%;
+      max-width: 900px;
+      margin: 32px auto;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    .extra-info {
+      width: 100%;
+      max-width: 900px;
+      margin: 32px auto 0 auto;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      text-align: center;
+      color: var(--main-color);
+      margin-bottom: 50px;
+    }
+
+    .extra-info h3 { color: var(--accent); margin-bottom: 12px; font-size: 1.3em; font-weight: 700; }
+    .extra-info p { color: #ccc; margin-bottom: 8px; font-size: 1.05em; }
+    .extra-info a { color: var(--danger); text-decoration: underline; font-weight: bold; transition: color var(--transition); }
+    .extra-info a:hover { color: var(--accent); }
+
+    footer {
+      text-align: center;
+      padding: 16px;
+      background: var(--navbar-bg);
+      border-top: 4px solid var(--danger);
+      color: var(--accent);
+      box-shadow: var(--shadow);
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="img/f1logo1-removebg-preview.png" alt="F1 Logo">
+      <span>FÓRMULA 1</span>
+    </div>
+
+    <div class="menu-toggle" id="menu-toggle">
+      <span></span><span></span><span></span>
+    </div>
+
+    <nav id="nav">
+      <a href="C:\Users\izaque.7944\Documents\front-end\f1-site\index.html">Início</a>
+      <a href="noticias.html">Notícias</a>
+      <a href="pilotos.html">Pilotos</a>
+      <a href="equipes.html">Equipes</a>
+      <a href="calendario.html">Calendário</a>
+      <a href="podio.html">Pódio</a>
+    </nav>
+  </header>
+
+  <section class="top3">
+    <div class="card verstappen">
+      <img src="../f1-site/img/maxfoot.avif" alt="Max Verstappen">
+      <h2>1º</h2>
+      <h1>Max Verstappen</h1>
+      <p>Red Bull Racing</p>
+      <p>295 pts</p>
+    </div>
+    <div class="card">
+      <img src="../f1-site/img/norrisfoot.avif" alt="Lando Norris">
+      <h2>2º</h2>
+      <h1>Lando Norris</h1>
+      <p>McLaren</p>
+      <p>270 pts</p>
+    </div>
+    <div class="card">
+      <img src="../f1-site/img/leclercfoot.avif" alt="Charles Leclerc">
+      <h2>3º</h2>
+      <h1>Charles Leclerc</h1>
+      <p>Ferrari</p>
+      <p>265 pts</p>
+    </div>
+  </section>
+
+  <div class="ranking-table-container">
+    <table>
+      <tr>
+        <th>POS.</th><th>PILOTO</th><th>NACIONALIDADE</th><th>EQUIPE</th><th>PTS.</th>
+      </tr>
+      <tr><td>1</td><td>Max Verstappen</td><td>Holanda</td><td>Red Bull Racing</td><td>295</td></tr>
+      <tr><td>2</td><td>Lando Norris</td><td>Reino Unido</td><td>McLaren</td><td>270</td></tr>
+      <tr><td>3</td><td>Charles Leclerc</td><td>Mônaco</td><td>Ferrari</td><td>265</td></tr>
+      <tr><td>4</td><td>Oscar Piastri</td><td>Austrália</td><td>McLaren</td><td>250</td></tr>
+      <tr><td>5</td><td>Lewis Hamilton</td><td>Reino Unido</td><td>Mercedes</td><td>235</td></tr>
+      <tr><td>6</td><td>George Russell</td><td>Reino Unido</td><td>Mercedes</td><td>225</td></tr>
+      <tr><td>7</td><td>Carlos Sainz</td><td>Espanha</td><td>Ferrari</td><td>210</td></tr>
+      <tr><td>8</td><td>Fernando Alonso</td><td>Espanha</td><td>Aston Martin</td><td>190</td></tr>
+      <tr><td>9</td><td>Pierre Gasly</td><td>França</td><td>Alpine</td><td>160</td></tr>
+      <tr><td>10</td><td>Esteban Ocon</td><td>França</td><td>Alpine</td><td>155</td></tr>
+      <tr><td>11</td><td>Alexander Albon</td><td>Tailândia</td><td>Williams</td><td>140</td></tr>
+      <tr><td>12</td><td>Yuki Tsunoda</td><td>Japão</td><td>RB</td><td>130</td></tr>
+      <tr><td>13</td><td>Liam Lawson</td><td>Nova Zelândia</td><td>RB</td><td>120</td></tr>
+      <tr><td>14</td><td>Lance Stroll</td><td>Canadá</td><td>Aston Martin</td><td>110</td></tr>
+      <tr><td>15</td><td>Jack Doohan</td><td>Austrália</td><td>Alpine</td><td>95</td></tr>
+      <tr><td>16</td><td>Nico Hülkenberg</td><td>Alemanha</td><td>Haas</td><td>85</td></tr>
+      <tr><td>17</td><td>Kimi Antonelli</td><td>Itália</td><td>Mercedes</td><td>70</td></tr>
+      <tr><td>18</td><td>Isack Hadjar</td><td>França</td><td>RB</td><td>60</td></tr>
+      <tr><td>19</td><td>Gabriel Bortoleto</td><td>Brasil</td><td>Sauber</td><td>45</td></tr>
+      <tr><td>20</td><td>Oliver Bearman</td><td>Reino Unido</td><td>Haas</td><td>35</td></tr>
+    </table>
+  </div>
+
+  <div class="chart-container">
+    <h3 style="color:var(--accent); text-align:center;">Gráfico de Pontos dos Pilotos</h3>
+    <canvas id="pointsChart"></canvas>
+  </div>
+
+  <div class="extra-info">
+    <h3>Ranking atualizado!</h3>
+    <p>Confira os detalhes dos pilotos, equipes e estatísticas da temporada.</p>
+    <p>Volte para o <a href="index.html">Dashboard</a> ou veja o <a href="calendario.html">Calendário de Provas</a>.</p>
+    <p>Participe do fórum e discuta os resultados das corridas!</p>
+  </div>
+
+  <footer>&copy; 2025 Fórmula 1 | Projeto inspirado no site oficial da F1</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('pointsChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [
+        'Max Verstappen','Lando Norris','Charles Leclerc','Oscar Piastri',
+        'Lewis Hamilton','George Russell','Carlos Sainz','Fernando Alonso',
+        'Pierre Gasly','Esteban Ocon','Alexander Albon','Yuki Tsunoda',
+        'Liam Lawson','Lance Stroll','Jack Doohan','Nico Hülkenberg',
+        'Kimi Antonelli','Isack Hadjar','Gabriel Bortoleto','Oliver Bearman'
+      ],
+      datasets: [{
+        label: 'Pontos 2025',
+        data: [295,270,265,250,235,225,210,190,160,155,140,130,120,110,95,85,70,60,45,35],
+        backgroundColor: [
+          '#00C2FF','#FF8700','#FF0000','#FFD300','#AAAAAA','#8888FF',
+          '#FF3333','#33FF33','#3399FF','#3366FF','#00FFFF','#6600FF',
+          '#CC00FF','#00CC00','#FF8800','#999999','#3366AA','#FF33FF','#00FFAA','#FFAA00'
+        ],
+        borderColor: '#111',
+        borderWidth: 1,
+        borderRadius: 8,
+        barThickness: 18
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          backgroundColor: '#111',
+          titleColor: '#00C2FF',
+          bodyColor: '#fff',
+          borderColor: '#00C2FF',
+          borderWidth: 1,
+          cornerRadius: 8,
+          padding: 10
+        },
+        title: {
+          display: false
+        }
+      },
+      scales: {
+        x: {
+          grid: {
+            color: '#222',
+            borderColor: '#333'
+          },
+          ticks: {
+            color: '#aaa',
+            font: { size: 12, family: 'Montserrat' }
+          }
+        },
+        y: {
+          grid: {
+            color: '#222',
+            borderColor: '#333'
+          },
+          ticks: {
+            color: '#E0E0E0',
+            font: { size: 12, family: 'Montserrat', weight: 'bold' }
+          }
+        }
+      },
+      layout: {
+        padding: { top: 10, right: 10, bottom: 10, left: 10 }
+      },
+      animation: {
+        duration: 1000,
+        easing: 'easeOutQuart'
+      }
+    }
+  });
+
+  // Menu mobile
+  const toggle=document.getElementById('menu-toggle');
+  const nav=document.getElementById('nav');
+  toggle.addEventListener('click',()=>{toggle.classList.toggle('active');nav.classList.toggle('active');});
+</script>
+
+</body>
+</html>

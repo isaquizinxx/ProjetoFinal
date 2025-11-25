@@ -289,13 +289,13 @@
 <body>
   <header>
     <div class="logo">
-      <img src="img/f1logo1-removebg-preview.png" alt="F1 Logo">
+      <img src="../img/f1logo1-removebg-preview.png" alt="F1 Logo">
       <span>FÓRMULA 1</span>
     </div>
     <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
       <div></div><div></div><div></div>
     </div>
-    <div>
+
       <nav id="nav">
         <a href="../index.html">Início</a>
         <a href="noticias.html">Notícias</a>
@@ -304,7 +304,7 @@
         <a href="calendario.html">Calendário</a>
         <a href="podio.html">Pódio</a>
       </nav>
-    </div>
+
   </header>
 
   <main>
@@ -326,26 +326,26 @@
 
     // LISTA COMPLETA DE PILOTOS (campos extras incluídos)
     const drivers = [
-      { name: 'Lando Norris', team: 'McLaren', country: 'United Kingdom', number: '4', age: 25, wins: 1, podiums: 15, poles: 3, img: 'pilotos imagens/norris (1).avif', bio: 'Lando Norris é jovem, rápido e carismático — tem boa velocidade de volta e se destacou na McLaren por consistência.' },
-      { name: 'Oscar Piastri', team: 'McLaren', country: 'Australia', number: '81', age: 23, wins: 0, podiums: 5, poles: 0, img: 'pilotos imagens/piastri (1).avif', bio: 'Oscar Piastri chegou à F1 com grande reputação das categorias inferiores; promissor e técnico em corrida.' },
-      { name: 'Max Verstappen', team: 'Red Bull Racing', country: 'Netherlands', number: '1', age: 27, wins: 60, podiums: 95, poles: 40, img: 'pilotos imagens/verstappen (1).avif', bio: 'Tricampeão mundial e um dos pilotos mais dominantes da era moderna — velocidade e agressividade.' },
-      { name: 'Yuki Tsunoda', team: 'Red Bull Racing', country: 'Japan', number: '22', age: 24, wins: 0, podiums: 0, poles: 0, img: 'pilotos imagens/tsunoda.avif', bio: 'Yuki é combativo e tem mostrado evolução constante — especialmente em ritmo de corrida.' },
-      { name: 'George Russell', team: 'Mercedes', country: 'United Kingdom', number: '63', age: 27, wins: 2, podiums: 20, poles: 3, img: 'pilotos imagens/george-russel.jpg', bio: 'George é consistente, bom na classificação e uma peça-chave para a Mercedes.' },
-      { name: 'Kimi Antonelli', team: 'Mercedes', country: 'Italy', number: '55', age: 18, wins: 0, podiums: 0, poles: 0, img: 'pilotos imagens/kimi-antonelli.jpg', bio: 'Talento jovem vindo dos escalões de base; muito observado pela sua maturidade para a idade.' },
-      { name: 'Charles Leclerc', team: 'Ferrari', country: 'Monaco', number: '16', age: 26, wins: 5, podiums: 30, poles: 20, img: 'pilotos imagens/charles-leclerc.jpg', bio: 'Principal piloto da Ferrari: velocidade pura em classificação e combatividade nas corridas.' },
-      { name: 'Lewis Hamilton', team: 'Ferrari', country: 'United Kingdom', number: '44', age: 40, wins: 103, podiums: 197, poles: 104, img: 'pilotos imagens/lewis-hamilton.jpg', bio: 'Sete vezes campeão mundial, mistura experiência e velocidade — ainda competitivo no topo.' },
-      { name: 'Alexander Albon', team: 'Williams', country: 'Thailand', number: '23', age: 28, wins: 0, podiums: 1, poles: 0, img: 'pilotos imagens/albon.avif', bio: 'Alex voltou à F1 com maturidade; ótimo em gestão de pneus e ultrapassagens.' },
-      { name: 'Carlos Sainz', team: 'Williams', country: 'Spain', number: '55', age: 29, wins: 1, podiums: 10, poles: 0, img: 'pilotos imagens/sainz.avif', bio: 'Piloto experiente, consistente e com bom trabalho em equipe — traz estabilidade.' },
-      { name: 'Liam Lawson', team: 'Racing Bulls', country: 'New Zealand', number: '63', age: 22, wins: 0, podiums: 0, poles: 0, img: 'pilotos imagens/lawson-racing-bulls.avif', bio: 'Jovem neozelandês com boa adaptação; se destaca em corridas de recuperação.' },
-      { name: 'Isack Hadjar', team: 'Racing Bulls', country: 'France', number: '21', age: 20, wins: 0, podiums: 0, poles: 0, img: 'pilotos imagens/hadjar.avif', bio: 'Promessa francesa vindo das categorias de base; técnico e rápido em ritmo de classificação.' },
-      { name: 'Fernando Alonso', team: 'Aston Martin', country: 'Spain', number: '14', age: 43, wins: 32, podiums: 99, poles: 22, img: 'pilotos imagens/alonso.avif', bio: 'Veterano resiliente, conhecido por sua inteligência de corrida e combatividade.' },
-      { name: 'Lance Stroll', team: 'Aston Martin', country: 'Canada', number: '18', age: 27, wins: 1, podiums: 6, poles: 0, img: 'pilotos imagens/stroll.avif', bio: 'Piloto com experiência variável; tem momentos de bom desempenho em corridas específicas.' },
-      { name: 'Esteban Ocon', team: 'Haas F1 Team', country: 'France', number: '31', age: 28, wins: 1, podiums: 5, poles: 0, img: 'pilotos imagens/ocon.avif', bio: 'Consistente, combativo e eficiente em estratégia — forte em corridas longas.' },
-      { name: 'Oliver Bearman', team: 'Haas F1 Team', country: 'United Kingdom', number: '36', age: 19, wins: 0, podiums: 0, poles: 0, img: 'pilotos imagens/bearman.avif', bio: 'Jovem promessa britânica com bons tempos de volta e sangue frio em disputas.' },
-      { name: 'Nico Hülkenberg', team: 'Kick Sauber', country: 'Germany', number: '27', age: 36, wins: 0, podiums: 0, poles: 0, img: 'pilotos imagens/hulkenberg.avif', bio: 'Veterano confiável, excelente em recuperação de corridas e estratégia de equipe.' },
-      { name: 'Gabriel Bortoleto', team: 'Kick Sauber', country: 'Brazil', number: '88', age: 19, wins: 0, podiums: 0, poles: 0, img: 'pilotos imagens/bortoleto.avif', bio: 'Jovem brasileiro que subiu com momentum — técnica apurada nas categorias de base.' },
-      { name: 'Pierre Gasly', team: 'Alpine', country: 'France', number: '10', age: 28, wins: 1, podiums: 9, poles: 0, img: 'pilotos imagens/gasly.avif', bio: 'Rápido em corridas e qualificação; consistente e combativo em condições difíceis.' },
-      { name: 'Franco Colapinto', team: 'Alpine', country: 'Argentina', number: '11', age: 22, wins: 0, podiums: 0, poles: 0, img: 'pilotos imagens/colapinto.avif', bio: 'Jovem talento argentino com pacote técnico forte e boa leitura de corrida.' }
+      { name: 'Lando Norris', team: 'McLaren', country: 'United Kingdom', number: '4', age: 25, wins: 11, podiums: 15, poles: 3, img: '../pilotos_imagens/norris (1).avif', bio: 'Lando Norris é jovem, rápido e carismático — tem boa velocidade de volta e se destacou na McLaren por consistência.' },
+      { name: 'Oscar Piastri', team: 'McLaren', country: 'Australia', number: '81', age: 23, wins: 9, podiums: 5, poles: 0, img: '../pilotos_imagens/piastri (1).avif', bio: 'Oscar Piastri chegou à F1 com grande reputação das categorias inferiores; promissor e técnico em corrida.' },
+      { name: 'Max Verstappen', team: 'Red Bull Racing', country: 'Netherlands', number: '1', age: 28, wins: 71, podiums: 97, poles: 40, img: '../pilotos_imagens/verstappen (1).avif', bio: 'Pentacampeão mundial e um dos pilotos mais dominantes da era moderna — velocidade e agressividade.' },
+      { name: 'Yuki Tsunoda', team: 'Red Bull Racing', country: 'Japan', number: '22', age: 25, wins: 0, podiums: 0, poles: 0, img: '../pilotos_imagens/tsunoda.avif', bio: 'Yuki é combativo e tem mostrado evolução constante — especialmente em ritmo de corrida.' },
+      { name: 'George Russell', team: 'Mercedes', country: 'United Kingdom', number: '63', age: 28, wins: 2, podiums: 20, poles: 3, img: '../pilotos_imagens/george-russel.jpg', bio: 'George é consistente, bom na classificação e uma peça-chave para a Mercedes.' },
+      { name: 'Kimi Antonelli', team: 'Mercedes', country: 'Italy', number: '12', age: 19, wins: 0, podiums: 0, poles: 0, img: '../pilotos_imagens/kimi-antonelli.jpg', bio: 'Talento jovem vindo dos escalões de base; muito observado pela sua maturidade para a idade.' },
+      { name: 'Charles Leclerc', team: 'Ferrari', country: 'Monaco', number: '16', age: 27, wins: 12, podiums: 30, poles: 20, img: '../pilotos_imagens/charles-leclerc.jpg', bio: 'Principal piloto da Ferrari: velocidade pura em classificação e combatividade nas corridas.' },
+      { name: 'Lewis Hamilton', team: 'Ferrari', country: 'United Kingdom', number: '44', age: 40, wins: 104, podiums: 200, poles: 104, img: '../pilotos_imagens/lewis-hamilton.jpg', bio: 'Sete vezes campeão mundial, mistura experiência e velocidade — ainda competitivo no topo.' },
+      { name: 'Alexander Albon', team: 'Williams', country: 'Thailand', number: '23', age: 28, wins: 0, podiums: 1, poles: 0, img: '../pilotos_imagens/albon.avif', bio: 'Alex voltou à F1 com maturidade; ótimo em gestão de pneus e ultrapassagens.' },
+      { name: 'Carlos Sainz', team: 'Williams', country: 'Spain', number: '55', age: 30, wins: 5, podiums: 10, poles: 0, img: '../pilotos_imagens/sainz.avif', bio: 'Piloto experiente, consistente e com bom trabalho em equipe — traz estabilidade.' },
+      { name: 'Liam Lawson', team: 'Racing Bulls', country: 'New Zealand', number: '30', age: 22, wins: 0, podiums: 0, poles: 0, img: '../pilotos_imagens/lawson-racing-bulls.avif', bio: 'Jovem neozelandês com boa adaptação; se destaca em corridas de recuperação.' },
+      { name: 'Isack Hadjar', team: 'Racing Bulls', country: 'France', number: '6', age: 20, wins: 0, podiums: 1, poles: 0, img: '../pilotos_imagens/hadjar.avif', bio: 'Promessa francesa vindo das categorias de base; técnico e rápido em ritmo de classificação.' },
+      { name: 'Fernando Alonso', team: 'Aston Martin', country: 'Spain', number: '14', age: 43, wins: 32, podiums: 99, poles: 22, img: '../pilotos_imagens/alonso.avif', bio: 'Veterano resiliente, conhecido por sua inteligência de corrida e combatividade.' },
+      { name: 'Lance Stroll', team: 'Aston Martin', country: 'Canada', number: '18', age: 27, wins: 1, podiums: 3, poles: 0, img: '../pilotos_imagens/stroll.avif', bio: 'Piloto com experiência variável; tem momentos de bom desempenho em corridas específicas.' },
+      { name: 'Esteban Ocon', team: 'Haas F1 Team', country: 'France', number: '31', age: 28, wins: 1, podiums: 5, poles: 0, img: '../pilotos_imagens/ocon.avif', bio: 'Consistente, combativo e eficiente em estratégia — forte em corridas longas.' },
+      { name: 'Oliver Bearman', team: 'Haas F1 Team', country: 'United Kingdom', number: '87', age: 19, wins: 0, podiums: 0, poles: 0, img: '../pilotos_imagens/bearman.avif', bio: 'Jovem promessa britânica com bons tempos de volta e sangue frio em disputas.' },
+      { name: 'Nico Hülkenberg', team: 'Kick Sauber', country: 'Germany', number: '27', age: 36, wins: 0, podiums: 1, poles: 0, img: '../pilotos_imagens/hulkenberg.avif', bio: 'Veterano confiável, excelente em recuperação de corridas e estratégia de equipe.' },
+      { name: 'Gabriel Bortoleto', team: 'Kick Sauber', country: 'Brazil', number: '5', age: 20, wins: 0, podiums: 0, poles: 0, img: '../pilotos_imagens/bortoleto.avif', bio: 'Jovem brasileiro que subiu com momentum — técnica apurada nas categorias de base.' },
+      { name: 'Pierre Gasly', team: 'Alpine', country: 'France', number: '10', age: 28, wins: 1, podiums: 9, poles: 0, img: '../pilotos_imagens/gasly.avif', bio: 'Rápido em corridas e qualificação; consistente e combativo em condições difíceis.' },
+      { name: 'Franco Colapinto', team: 'Alpine', country: 'Argentina', number: '43', age: 23, wins: 0, podiums: 0, poles: 0, img: '../pilotos_imagens/colapinto.avif', bio: 'Jovem talento argentino com pacote técnico forte e boa leitura de corrida.' }
     ];
 
     // PEGAR PILOTO PELO HASH (mesma lógica do index)

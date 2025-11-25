@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
   <title>Fórmula 1 - Pódio</title>
@@ -102,7 +103,10 @@
     }
 
     @media (max-width: 900px) {
-      .menu-toggle { display: flex; }
+      .menu-toggle {
+        display: flex;
+      }
+
       nav {
         position: absolute;
         top: 80px;
@@ -118,11 +122,30 @@
         opacity: 0;
         transition: all 0.4s ease;
       }
-      nav.active { transform: translateY(0); opacity: 1; }
-      nav a { display: block; width: 100%; text-align: center; padding: 12px; }
-      .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translateY(8px); }
-      .menu-toggle.active span:nth-child(2) { opacity: 0; }
-      .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translateY(-8px); }
+
+      nav.active {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      nav a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+      }
+
+      .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translateY(8px);
+      }
+
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translateY(-8px);
+      }
     }
 
     .top3 {
@@ -207,7 +230,8 @@
       font-size: 1.05em;
     }
 
-    th, td {
+    th,
+    td {
       padding: 12px 8px;
       text-align: center;
       border-bottom: 1px solid #333;
@@ -249,10 +273,29 @@
       margin-bottom: 50px;
     }
 
-    .extra-info h3 { color: var(--accent); margin-bottom: 12px; font-size: 1.3em; font-weight: 700; }
-    .extra-info p { color: #ccc; margin-bottom: 8px; font-size: 1.05em; }
-    .extra-info a { color: var(--danger); text-decoration: underline; font-weight: bold; transition: color var(--transition); }
-    .extra-info a:hover { color: var(--accent); }
+    .extra-info h3 {
+      color: var(--accent);
+      margin-bottom: 12px;
+      font-size: 1.3em;
+      font-weight: 700;
+    }
+
+    .extra-info p {
+      color: #ccc;
+      margin-bottom: 8px;
+      font-size: 1.05em;
+    }
+
+    .extra-info a {
+      color: var(--danger);
+      text-decoration: underline;
+      font-weight: bold;
+      transition: color var(--transition);
+    }
+
+    .extra-info a:hover {
+      color: var(--accent);
+    }
 
     footer {
       text-align: center;
@@ -265,6 +308,7 @@
     }
   </style>
 </head>
+
 <body>
   <header>
     <div class="logo">
@@ -275,66 +319,191 @@
     <div class="menu-toggle" id="menu-toggle">
       <span></span><span></span><span></span>
     </div>
-
-    <nav id="nav">
-      <a href="C:\Users\izaque.7944\Documents\front-end\f1-site\index.html">Início</a>
-      <a href="noticias.html">Notícias</a>
-      <a href="pilotos.html">Pilotos</a>
-      <a href="equipes.html">Equipes</a>
-      <a href="calendario.html">Calendário</a>
-      <a href="podio.html">Pódio</a>
-    </nav>
+    <div>
+      <nav id="nav">
+        <a href="C:\Users\izaque.7944\Documents\front-end\f1-site\index.html">Início</a>
+        <a href="noticias.html">Notícias</a>
+        <a href="pilotos.html">Pilotos</a>
+        <a href="equipes.html">Equipes</a>
+        <a href="calendario.html">Calendário</a>
+        <a href="podio.html">Pódio</a>
+      </nav>
+    </div>
   </header>
 
   <section class="top3">
+    <div class="card">
+      <img src="../f1-site/img/leclercfoot.avif" alt="Lando Norris">
+      <h2>2º</h2>
+      <h1>Charles Leclerc</h1>
+      <p>Ferrari</p>
+      <p>398 pts</p>
+    </div>
     <div class="card verstappen">
       <img src="../f1-site/img/maxfoot.avif" alt="Max Verstappen">
       <h2>1º</h2>
       <h1>Max Verstappen</h1>
       <p>Red Bull Racing</p>
-      <p>295 pts</p>
+      <p>424 pts</p>
     </div>
     <div class="card">
-      <img src="../f1-site/img/norrisfoot.avif" alt="Lando Norris">
-      <h2>2º</h2>
+      <img src="../f1-site/img/norrisfoot.avif" alt="Charles Leclerc">
+      <h2>3º</h2>
       <h1>Lando Norris</h1>
       <p>McLaren</p>
-      <p>270 pts</p>
-    </div>
-    <div class="card">
-      <img src="../f1-site/img/leclercfoot.avif" alt="Charles Leclerc">
-      <h2>3º</h2>
-      <h1>Charles Leclerc</h1>
-      <p>Ferrari</p>
-      <p>265 pts</p>
+      <p>378 pts</p>
     </div>
   </section>
 
   <div class="ranking-table-container">
     <table>
       <tr>
-        <th>POS.</th><th>PILOTO</th><th>NACIONALIDADE</th><th>EQUIPE</th><th>PTS.</th>
+        <th>POS.</th>
+        <th>PILOTO</th>
+        <th>NACIONALIDADE</th>
+        <th>EQUIPE</th>
+        <th>PTS.</th>
       </tr>
-      <tr><td>1</td><td>Max Verstappen</td><td>Holanda</td><td>Red Bull Racing</td><td>295</td></tr>
-      <tr><td>2</td><td>Lando Norris</td><td>Reino Unido</td><td>McLaren</td><td>270</td></tr>
-      <tr><td>3</td><td>Charles Leclerc</td><td>Mônaco</td><td>Ferrari</td><td>265</td></tr>
-      <tr><td>4</td><td>Oscar Piastri</td><td>Austrália</td><td>McLaren</td><td>250</td></tr>
-      <tr><td>5</td><td>Lewis Hamilton</td><td>Reino Unido</td><td>Mercedes</td><td>235</td></tr>
-      <tr><td>6</td><td>George Russell</td><td>Reino Unido</td><td>Mercedes</td><td>225</td></tr>
-      <tr><td>7</td><td>Carlos Sainz</td><td>Espanha</td><td>Ferrari</td><td>210</td></tr>
-      <tr><td>8</td><td>Fernando Alonso</td><td>Espanha</td><td>Aston Martin</td><td>190</td></tr>
-      <tr><td>9</td><td>Pierre Gasly</td><td>França</td><td>Alpine</td><td>160</td></tr>
-      <tr><td>10</td><td>Esteban Ocon</td><td>França</td><td>Alpine</td><td>155</td></tr>
-      <tr><td>11</td><td>Alexander Albon</td><td>Tailândia</td><td>Williams</td><td>140</td></tr>
-      <tr><td>12</td><td>Yuki Tsunoda</td><td>Japão</td><td>RB</td><td>130</td></tr>
-      <tr><td>13</td><td>Liam Lawson</td><td>Nova Zelândia</td><td>RB</td><td>120</td></tr>
-      <tr><td>14</td><td>Lance Stroll</td><td>Canadá</td><td>Aston Martin</td><td>110</td></tr>
-      <tr><td>15</td><td>Jack Doohan</td><td>Austrália</td><td>Alpine</td><td>95</td></tr>
-      <tr><td>16</td><td>Nico Hülkenberg</td><td>Alemanha</td><td>Haas</td><td>85</td></tr>
-      <tr><td>17</td><td>Kimi Antonelli</td><td>Itália</td><td>Mercedes</td><td>70</td></tr>
-      <tr><td>18</td><td>Isack Hadjar</td><td>França</td><td>RB</td><td>60</td></tr>
-      <tr><td>19</td><td>Gabriel Bortoleto</td><td>Brasil</td><td>Sauber</td><td>45</td></tr>
-      <tr><td>20</td><td>Oliver Bearman</td><td>Reino Unido</td><td>Haas</td><td>35</td></tr>
+      <tr>
+        <td>1</td>
+        <td>Max Verstappen</td>
+        <td>Holanda</td>
+        <td>Red Bull Racing</td>
+        <td>424</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Charles Leclerc</td>
+        <td>Mônaco</td>
+        <td>Ferrari</td>
+        <td>398</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Lando Norris</td>
+        <td>Reino Unido</td>
+        <td>McLaren</td>
+        <td>378</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Oscar Piastri</td>
+        <td>Austrália</td>
+        <td>McLaren</td>
+        <td>316</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Lewis Hamilton</td>
+        <td>Reino Unido</td>
+        <td>Ferrari</td>
+        <td>274</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>George Russell</td>
+        <td>Reino Unido</td>
+        <td>Mercedes</td>
+        <td>267</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>Carlos Sainz</td>
+        <td>Espanha</td>
+        <td>Williams</td>
+        <td>260</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>Fernando Alonso</td>
+        <td>Espanha</td>
+        <td>Aston Martin</td>
+        <td>245</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Pierre Gasly</td>
+        <td>França</td>
+        <td>Alpine</td>
+        <td>231</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>Esteban Ocon</td>
+        <td>França</td>
+        <td>Haas</td>
+        <td>212</td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td>Alexander Albon</td>
+        <td>Tailândia</td>
+        <td>Williams</td>
+        <td>193</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>Yuki Tsunoda</td>
+        <td>Japão</td>
+        <td>Red Bull Racing</td>
+        <td>171</td>
+      </tr>
+      <tr>
+        <td>13</td>
+        <td>Liam Lawson</td>
+        <td>Nova Zelândia</td>
+        <td>RB</td>
+        <td>156</td>
+      </tr>
+      <tr>
+        <td>14</td>
+        <td>Lance Stroll</td>
+        <td>Canadá</td>
+        <td>Aston Martin</td>
+        <td>137</td>
+      </tr>
+      <tr>
+        <td>15</td>
+        <td>Jack Doohan</td>
+        <td>Austrália</td>
+        <td>Alpine</td>
+        <td>125</td>
+      </tr>
+      <tr>
+        <td>16</td>
+        <td>Nico Hülkenberg</td>
+        <td>Alemanha</td>
+        <td>Sauber</td>
+        <td>118</td>
+      </tr>
+      <tr>
+        <td>17</td>
+        <td>Kimi Antonelli</td>
+        <td>Itália</td>
+        <td>Mercedes</td>
+        <td>95</td>
+      </tr>
+      <tr>
+        <td>18</td>
+        <td>Isack Hadjar</td>
+        <td>França</td>
+        <td>RB</td>
+        <td>76</td>
+      </tr>
+      <tr>
+        <td>19</td>
+        <td>Gabriel Bortoleto</td>
+        <td>Brasil</td>
+        <td>Sauber</td>
+        <td>75</td>
+      </tr>
+      <tr>
+        <td>20</td>
+        <td>Oliver Bearman</td>
+        <td>Reino Unido</td>
+        <td>Haas</td>
+        <td>67</td>
+      </tr>
     </table>
   </div>
 
@@ -353,90 +522,91 @@
   <footer>&copy; 2025 Fórmula 1 | Projeto inspirado no site oficial da F1</footer>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-  const ctx = document.getElementById('pointsChart').getContext('2d');
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: [
-        'Max Verstappen','Lando Norris','Charles Leclerc','Oscar Piastri',
-        'Lewis Hamilton','George Russell','Carlos Sainz','Fernando Alonso',
-        'Pierre Gasly','Esteban Ocon','Alexander Albon','Yuki Tsunoda',
-        'Liam Lawson','Lance Stroll','Jack Doohan','Nico Hülkenberg',
-        'Kimi Antonelli','Isack Hadjar','Gabriel Bortoleto','Oliver Bearman'
-      ],
-      datasets: [{
-        label: 'Pontos 2025',
-        data: [295,270,265,250,235,225,210,190,160,155,140,130,120,110,95,85,70,60,45,35],
-        backgroundColor: [
-          '#00C2FF','#FF8700','#FF0000','#FFD300','#AAAAAA','#8888FF',
-          '#FF3333','#33FF33','#3399FF','#3366FF','#00FFFF','#6600FF',
-          '#CC00FF','#00CC00','#FF8800','#999999','#3366AA','#FF33FF','#00FFAA','#FFAA00'
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('pointsChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [
+          'Max Verstappen', 'Charles Leclerc', 'Lando Norris', 'Oscar Piastri',
+          'Lewis Hamilton', 'George Russell', 'Carlos Sainz', 'Fernando Alonso',
+          'Pierre Gasly', 'Esteban Ocon', 'Alexander Albon', 'Yuki Tsunoda',
+          'Liam Lawson', 'Lance Stroll', 'Jack Doohan', 'Nico Hülkenberg',
+          'Kimi Antonelli', 'Isack Hadjar', 'Gabriel Bortoleto', 'Oliver Bearman'
         ],
-        borderColor: '#111',
-        borderWidth: 1,
-        borderRadius: 8,
-        barThickness: 18
-      }]
-    },
-    options: {
-      indexAxis: 'y',
-      responsive: true,
-      plugins: {
-        legend: {
-          display: false
-        },
-        tooltip: {
-          backgroundColor: '#111',
-          titleColor: '#00C2FF',
-          bodyColor: '#fff',
-          borderColor: '#00C2FF',
+        datasets: [{
+          label: 'Pontos 2025',
+          data: [424, 398, 378, 316, 274, 267, 260, 245, 231, 212, 193, 171, 156, 137, 125, 119, 95, 76, 75, 67],
+          backgroundColor: [
+            '#00C2FF', '#FF0000', '#FF8700', '#FFD300', '#AAAAAA', '#8888FF',
+            '#FF3333', '#33FF33', '#3399FF', '#3366FF', '#00FFFF', '#6600FF',
+            '#CC00FF', '#00CC00', '#FF8800', '#999999', '#3366AA', '#FF33FF', '#00FFAA', '#FFAA00'
+          ],
+          borderColor: '#111',
           borderWidth: 1,
-          cornerRadius: 8,
-          padding: 10
-        },
-        title: {
-          display: false
-        }
+          borderRadius: 8,
+          barThickness: 18
+        }]
       },
-      scales: {
-        x: {
-          grid: {
-            color: '#222',
-            borderColor: '#333'
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
           },
-          ticks: {
-            color: '#aaa',
-            font: { size: 12, family: 'Montserrat' }
+          tooltip: {
+            backgroundColor: '#111',
+            titleColor: '#00C2FF',
+            bodyColor: '#fff',
+            borderColor: '#00C2FF',
+            borderWidth: 1,
+            cornerRadius: 8,
+            padding: 10
+          },
+          title: {
+            display: false
           }
         },
-        y: {
-          grid: {
-            color: '#222',
-            borderColor: '#333'
+        scales: {
+          x: {
+            grid: {
+              color: '#222',
+              borderColor: '#333'
+            },
+            ticks: {
+              color: '#aaa',
+              font: { size: 12, family: 'Montserrat' }
+            }
           },
-          ticks: {
-            color: '#E0E0E0',
-            font: { size: 12, family: 'Montserrat', weight: 'bold' }
+          y: {
+            grid: {
+              color: '#222',
+              borderColor: '#333'
+            },
+            ticks: {
+              color: '#E0E0E0',
+              font: { size: 12, family: 'Montserrat', weight: 'bold' }
+            }
           }
+        },
+        layout: {
+          padding: { top: 10, right: 10, bottom: 10, left: 10 }
+        },
+        animation: {
+          duration: 1000,
+          easing: 'easeOutQuart'
         }
-      },
-      layout: {
-        padding: { top: 10, right: 10, bottom: 10, left: 10 }
-      },
-      animation: {
-        duration: 1000,
-        easing: 'easeOutQuart'
       }
-    }
-  });
+    });
 
-  // Menu mobile
-  const toggle=document.getElementById('menu-toggle');
-  const nav=document.getElementById('nav');
-  toggle.addEventListener('click',()=>{toggle.classList.toggle('active');nav.classList.toggle('active');});
-</script>
+    // Menu mobile
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('nav');
+    toggle.addEventListener('click', () => { toggle.classList.toggle('active'); nav.classList.toggle('active'); });
+  </script>
 
 </body>
+
 </html>

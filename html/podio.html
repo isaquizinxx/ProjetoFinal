@@ -146,6 +146,65 @@
       .menu-toggle.active span:nth-child(3) {
         transform: rotate(-45deg) translateY(-8px);
       }
+
+      .top3 {
+        gap: 20px;
+        margin: 24px 0;
+      }
+
+      .card {
+        width: 180px;
+        padding: 18px;
+      }
+
+      .card img {
+        width: 90px;
+      }
+
+      table {
+        font-size: 0.9em;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .ranking-table-container {
+        overflow-x: auto;
+        padding: 0 10px;
+      }
+
+      table {
+        min-width: 600px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .card {
+        width: 100%;
+        max-width: 320px;
+      }
+
+      .top3 {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      header {
+        padding: 10px 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo span {
+        font-size: 1.1em;
+      }
+
+      nav a {
+        font-size: 0.95em;
+      }
+
+      .extra-info p {
+        font-size: 0.9em;
+      }
     }
 
     .top3 {
